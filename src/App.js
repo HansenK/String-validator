@@ -22,7 +22,7 @@ class App extends Component {
     const openedItems = ['{','(','['];
     const closedItems = ['}',')',']'];
     let foundOpenedItems = [];
-    let foundClosedItems =[];
+    let foundClosedItems = [];
     let stringSubmited = this.state.value;
     let result = this.state.result;
     let resultColor = this.state.resultColor;
@@ -32,16 +32,17 @@ class App extends Component {
         if(stringSubmited[a] === openedItems[b]){
           foundOpenedItems.push(openedItems[b]);
         }
-        if(foundOpenedItems.length > 0){
-          for(let c=0; c<foundOpenedItems.length; c++){
-            if(foundOpenedItems[c]==='{') {foundOpenedItems[c]='}';}
-            if(foundOpenedItems[c]==='(') {foundOpenedItems[c]=')';}
-            if(foundOpenedItems[c]==='[') {foundOpenedItems[c]=']';}
-          }
-        }
         if(stringSubmited[a] === closedItems[b]){
           foundClosedItems.push(closedItems[b]);
         }
+      }
+    }
+
+    if(foundOpenedItems.length > 0){
+      for(let c=0; c<foundOpenedItems.length; c++){
+        if(foundOpenedItems[c]==='{') {foundOpenedItems[c]='}';}
+        if(foundOpenedItems[c]==='(') {foundOpenedItems[c]=')';}
+        if(foundOpenedItems[c]==='[') {foundOpenedItems[c]=']';}
       }
     }
 
