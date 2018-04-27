@@ -26,6 +26,7 @@ class App extends Component {
     let stringSubmited = this.state.value;
     let result = this.state.result;
     let resultColor = this.state.resultColor;
+    let flag = 1;
 
     for(let a=0; a<stringSubmited.length;a++){
       for(let b=0; b<3; b++){
@@ -34,6 +35,10 @@ class App extends Component {
         }
         if(stringSubmited[a] === closedItems[b]){
           foundClosedItems.push(closedItems[b]);
+          if(foundClosedItems.length>foundOpenedItems.length){
+            result = 'Invlid string';
+            flag = 0;
+          }
         }
       }
     }
@@ -50,14 +55,11 @@ class App extends Component {
       result = 'Valid string';
     }
 
-    if(foundOpenedItems.length === foundClosedItems.length){
+    if(foundOpenedItems.length === foundClosedItems.length && flag===1){
       for(let a=0, b=foundClosedItems.length-1; a<foundOpenedItems.length; a++, b--){
-        if(b<0){
-          result = 'Invalid string';
-          break;
-        }
         if(foundClosedItems[b] === foundOpenedItems[a]){
           result = 'Valid string';
+          break;
         }
         else{
           result = 'Invalid string';
@@ -67,6 +69,8 @@ class App extends Component {
     }
     else result = 'Invalid string';
 
+    console.log('FOPI', foundOpenedItems.length);
+    console.log('FCLI', foundClosedItems.length);
     if(result === 'Valid string'){
       resultColor = 'green';
     }
